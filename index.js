@@ -154,6 +154,13 @@ app.post("/messages", async (req, res) => {
 // PUT request handler
 app.put("/messages/:messageId", async (req, res) => {
   try {
+    // if req.body is an empty {} or non-existant {}
+    if (!req.body || Object.keys(req.body).length === 0) {
+      return res.status(400).json({
+        success: false,
+        error: "PUT request requires a body",
+      });
+    }
     // deconstruct messageId from request parameters
     const { messageId } = req.params;
     // check if message id is in URL path
