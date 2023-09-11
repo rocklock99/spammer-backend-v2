@@ -7,6 +7,14 @@ import cors from "cors";
 const prisma = new PrismaClient();
 const app = express();
 
+// allow requests from deployed frontend on netlify domain
+app.use(
+  cors({
+    origin:
+      "https://64feefde5cf4cf60fa183520--stellular-cassata-1a9cf0.netlify.app",
+  })
+);
+
 // middleware that converts JSON to object
 app.use(express.json());
 
